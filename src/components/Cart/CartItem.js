@@ -1,18 +1,29 @@
 import classes from './CartItem.module.css';
 import { CartActions } from '../../store/SliceCart';
-import { useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 const CartItem = (props) => {
-  const { title, quantity, total, price } = props.item;
 
-  useSelector(state => state.cart)
+  const dispatch = useDispatch();
+  const { title, quantity, total, price,id } = props.item;
+
+  const addItemHandler = () => {
+    dispatch(CartActions.addItemToCart({
+      id,
+      title,
+      price
+    }))
+  }
+  const removeItemHandler = () => {
+    dispatch(CartActions.removeItemFromCart(id))
+  }
 
   return (
     <li className={classes.item}>
       <header>
         <h3>{title}</h3>
         <div className={classes.price}>
-          ${total.toFixed(2)}{' '}
-          <span className={classes.itemprice}>(${price.toFixed(2)}/item)</span>
+          ₹{total.toFixed(2)}{' '}
+          <span className={classes.itemprice}>(₹{price.toFixed(2)}/item)</span>
         </div>
       </header>
       <div className={classes.details}>
@@ -20,8 +31,8 @@ const CartItem = (props) => {
           x <span>{quantity}</span>
         </div>
         <div className={classes.actions}>
-          <button>-</button>
-          <button>+</button>
+          <button onClick={removeItemHandler}>-</button>
+          <button onClick={addItemHandler}>+</button>
         </div>
       </div>
     </li>

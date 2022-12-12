@@ -1,15 +1,25 @@
 import ProductItem from './ProductItem';
 import classes from './Products.module.css';
 const data = [
-  {
-    price:150,
-    title:'my first book',
-    description:'This is the first book written by me.'
+  { id:'m1',
+    price:160,
+    title:'Margherita',
+    description:'This is the best pizza that you will ever have'
   },
-  {
+  { id:'m2',
     price:200,
-    title:'my second book',
-    description:'This is the second book written by me.'
+    title:'Paneer Butter Masala',
+    description:'tastes like home made'
+  },{
+    id:'m3',
+    price:255,
+    title:'Crispy Chicken',
+    description:'Burger with NV meals'
+  },{
+    id:'m4',
+    price:95,
+    title:'American Corn Pizza',
+    description:'Corn spread all over it.'
   }
 ]
 
@@ -20,6 +30,7 @@ const Products = (props) => {
       <ul>
        {data.map(product =>( <ProductItem
           key={product.id}
+          id={product.id}
           title={product.title}
           price={product.price}
           description={product.description}
